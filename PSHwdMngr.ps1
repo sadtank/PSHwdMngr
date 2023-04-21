@@ -150,7 +150,7 @@ Function Load-DB {
     if(!$test){
         $global:DB = $DBJson | ConvertFrom-Json
         if($Global:DB){
-            Status green "loaded $($Global:DB.count) entries"
+            Status green "loaded $(($Global:DB.name).count) entries"
             if($global:autoclose){Auto-Close}
         }else{
             Status red "DB not loaded" 
