@@ -22,12 +22,12 @@ There are three base64 encoded strings. One is for the DiceWare word list and th
 There is no builtin multilane text editor for PSH (or any Win CLI…). So to edit notes the user can choose to use CLI only or popup a form GUI. Check the `Edit-Notes` function (aliased to `vim`) to see the implementation. It’s easy to overwrite the notes field incorrectly, so I recommend using the GUI for multi-line notes whenever possible.
 
 ## First use
-1. Run the .ps1, importing the functions into the current session. use `. .\PSHwdMngr.ps1` if current working directory and `. "<path>\PSHwdMngr.ps1"' for full path.
+1. Run the .ps1, importing the functions into the current session. use `. .\PSHwdMngr.ps1` if current working directory and `. "<path>\PSHwdMngr.ps1"` for full path.
 2. Ignoring all errors, either create a new entry or import KeePass.
 3. Run `lse` to check the contents of `$global:db` in memory.
-4. Run `savedb <path> -force $true` to save the DB at the desired directory. (recommend current working directory). Consider using `New-DiceWare` to help generate a secure passphrase which is easy to remember. 
+4. Consider using `New-DiceWare` to help generate a secure passphrase which is easy to remember. Run `savedb <path> -force $true` to save the DB at the desired directory. (Recommend script directory). 
 5. Adjust the $global:autoload variable in the script to match your new db path.
-6. Re-run one-liner from step 1 to clobber functions in memory.
+6. Re-run one-liner from step 1 to clobber functions in memory, adding your new auto-load path.
 Your db should now auto load every time it's run.
 
 ## Common commands
