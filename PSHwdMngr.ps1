@@ -981,24 +981,7 @@ Function About-PSHwdMngr{
         OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
         SOFTWARE.
  
-        '
-    Write-Host '
-        Q: Why not let functions accept pipeline objects?
-        A: This becomes a mess when prioritizing auto-save and auto-close. These prevent the sensitive vars 
-        from existing in memory for too long. But pipeline input would need to skip over the end of a function
-        when output is being passed to another function. This is overly complicated for this implemtation.
-    
-        Q: How does the pwned property work?
-        A: Have I Been Pwned (HIBP) requires downloading and running an executable in order to pull down a complete pwned list
-        (best practice) and there are hundreds of millions of lines to search. Using the API costs a little, and I am cheap.
- 
-        Q: Can I join two DBs? How about split them out?
-        A: Yes, but you will need to use manipulate the underlying $DB array of objects and do that manually.
-        None of the import/load/save functions in PSHwdMngr are built for that, specifically.
-        However, creative use of the $DB object and the import/load/save functions should
-        make both possible. Be sure to backup your DB first!
-    '
- 
+        ' 
     Write-Host "User functions:"
     List-Functions
 }
