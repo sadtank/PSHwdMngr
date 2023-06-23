@@ -17,6 +17,8 @@ Powershell CLI password manager
 5. Re-run one-liner from step 1 to clobber functions in memory to load your new auto-load path.
 Your db should now auto load every time it's run and prompt for the decryption pwd.
 
+## Info
+
 This script is designed to work in less-permissive environments, where some .net namespaces/methods may not be available. Some `system` namespaces are required for encryption methods, so if `$ExecutionContext.SessionState.LanguageMode` is set to `ConstrainedLanguage` then it may not be possible to run this script. Simalarly, the execution policy (`Get-ExecutionPolicy`) may not allow saved scripts to run, but may allow them to be run from the cmdline (paste all) or run from unsaved ISE.
 
 Encryption relevant functions are grouped in the `Encryption SET` for easy code review reference. The use case for this script includes being able to transfer the db between computers. Many native credential objects entangle the user/computer, meaning the db could not be read on another machine. This instead uses a password as the AES key material, for symmetric encryption.
