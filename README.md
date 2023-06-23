@@ -84,9 +84,13 @@ Get-RandomPassword
 New-DiceWare <number of words>
 ```
 ## Q/A
+Q: Why do urls open in Edge of all things?
+
+A: Feel free to research and find more reliable ways to open default browsers with url arguments from PowerShell... Grep for `microsoft-edge` and replace. It's not straightforward to call other types of browsers from PowerShell, or the default browser... (I'm lazy). Might be a fun weekend project for you.
+
 Q: Why not let functions accept objects from pipeline?
 
-A: This becomes a mess when prioritizing auto-save and auto-close which prevents sensitive vars from existing in memory for too long. As it is, there is a main function called after every command to reset the autosave timer. Other implementations perhaps could use a job, but would not know what the use is doing, and could initiate an autoclose while the user is in the middle of modifying entries. The current implementation would pipeline input would need to skip over the end of a function when output is being passed to another function vie pipeline. This is overly complicated for this implementation. The functionality gained via pipelines would greatly impact security and create much more complexity to design.
+A: This becomes a mess when prioritizing auto-save and auto-close which prevents sensitive vars from existing in memory for too long. As it is, there is a main function called after every command to reset the autosave timer. Other implementations perhaps could use a job, but would not know what the use is doing, and could initiate an autoclose while the user is in the middle of modifying entries. The current implementation would pipeline input would need to skip over the end of a function when output is being passed to another function vie pipeline. This is overly complicated for this implementation. The functionality gained via pipelines would greatly impact security and create much more complexity to design. If your use case needs this functionality, sounds like your next weekend is going to be pretty exciting.
 
 Q: Can I use HIBP?
 
@@ -94,8 +98,8 @@ A: Have I Been Pwned (HIBP) requires downloading and running an executable in or
  
 Q: Can I join two DBs? How about split them out?
 
-A: Yes, but you will need to manipulate the underlying $DB array of objects and do that manually. None of the import/load/save functions in PSHwdMngr are built for that, specifically. However, creative use of the $DB object and the import/load/save functions should make both possible. Be sure to backup your DB first!
+A: Yes, but you will need to manipulate the underlying $DB array of objects and do that manually. None of the import/load/save functions in PSHwdMngr are built for that specifically. However, creative use of the $DB object and the import/load/save functions may make both possible. Be sure to backup your DB first!
 
 Q: Can I export DBs? What if I want to go back to KeePass...?
 
-A: My master plan is to lock everyone into my system forever. When unencrypted in memory, the $db variable holds everything you'd need... sounds like another weekend project for you.
+A: My master plan is to lock everyone into my system forever. When unencrypted in memory, the $db variable holds everything you need to export as json/csv... sounds like another weekend project for you.
