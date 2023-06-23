@@ -7,7 +7,8 @@ Powershell CLI password manager
 * Import from KeePass
 * Random password generation with granular complexity
 * Diceware password generation with entropy calculation
-* Quickly go to login url, automatic username/pwd copy to clipboard (and clear)
+* Quickly navigate to login url
+* Automatic username/pwd copy to clipboard (and clear)
 
 ## First use
 1. Run the .ps1, importing the functions into the current session. use `. .\PSHwdMngr.ps1` if current working directory and `. "<path>\PSHwdMngr.ps1"` for full path.
