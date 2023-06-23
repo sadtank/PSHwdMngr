@@ -328,7 +328,6 @@ Function Import-KeePassXML{
         if($global:autoclose){Auto-Close}
         break
         }
-    #$Path = "C:\Users\lettaja\Documents\EY-entries.xml"
     $XPath = "/KeePassFile/Root/Group"
     $obj = Select-Xml -Path $Path -XPath $Xpath | Select-Object -ExpandProperty Node
  
@@ -737,7 +736,7 @@ Function New-DiceWare ($numWords){
     <# TO PERFORM ENCODING
     $encoded = [Convert]::ToBase64String(
       [System.Text.Encoding]::Unicode.GetBytes(
-        (Get-Content -Path "C:\Users\lettaja\Downloads\wordlist.txt" -Raw -Encoding UTF8)
+        (Get-Content -Path "wordlist.txt" -Raw -Encoding UTF8)
       )
     )
     #>
@@ -1089,7 +1088,7 @@ Function Main-Func(){
     $global:autosave = $True
     $global:autoclose = $True
     $global:autosaveMins = 5
-    $Global:path = Join-Path $PSScriptRoot 'eydb.bin' #lookds for this file in the script folder
+    $Global:path = Join-Path $PSScriptRoot 'mydb.bin' #lookds for this file in the script folder
  
     write-host ""
     if($autoLoad){
