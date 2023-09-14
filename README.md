@@ -2,7 +2,7 @@
 Powershell CLI password manager
 
 * FIPS 140-2 compliant encryption methods
-* Fully in-memory, only needs this .ps1 and .bin (db file)
+* DB is encrypted on disk and loaded in (.ps1 and .bin db file)
 * PSH native (no modules or executable binaries needed)
 * Import from KeePass
 * Random password generation with granular complexity
