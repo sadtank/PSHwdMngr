@@ -4,6 +4,7 @@ Powershell CLI password manager
 * FIPS 140-2 compliant encryption methods
 * DB is encrypted on disk and loaded in (.ps1 and .bin db file)
 * PSH native (no modules or executable binaries needed)
+* TOTP support based on RFC 6238
 * Import from KeePass
 * Random password generation with granular complexity
 * Diceware password generation with entropy calculation
