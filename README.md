@@ -24,7 +24,7 @@ Your db should now auto load every time it's run and prompt for the decryption p
 
 ## Info
 
-This script is designed to work in less-permissive environments, where some .net namespaces/methods may not be available. Some `system` namespaces are required for encryption methods, so if `$ExecutionContext.SessionState.LanguageMode` is set to `ConstrainedLanguage` then it may not be possible to run this script. Simalarly, the execution policy (`Get-ExecutionPolicy`) may not allow saved scripts to run, but may allow them to be run from the cmdline (paste all) or run from unsaved ISE.
+This script is designed to work in less-permissive environments, where downloding apps is not permitted... even where some .net namespaces/methods may not be available. Some `system` namespaces are required for encryption methods, so if `$ExecutionContext.SessionState.LanguageMode` is set to `ConstrainedLanguage` then it may not be possible to run this script. Simalarly, the execution policy (`Get-ExecutionPolicy`) may not allow saved scripts to run, but may allow them to be run from the cmdline (paste all) or run from unsaved ISE.
 
 Encryption relevant functions are grouped in the `Encryption SET` for easy code review reference. The use case for this script includes being able to transfer the db between computers. Many native credential objects entangle the user/computer, meaning the db could not be read on another machine. This instead uses a password as the AES key material, for symmetric encryption.
 
@@ -38,7 +38,7 @@ There is no builtin multilane text editor for PSH (or any Win CLI…). So to edi
 - Recommend using `New-DiceWare` to generate a master password for the db. This will be memorable and quick to type. Consider using `New-DiceWare` when needing to generate a secure passphrase which is easy to remember/type (eg, host pwd, password db, etc). Use the random password generator (Get-RandomPassword) for passwords which can be auto typed by PSHwdMngr.
 - Every change to your db is a "full send." It's not a bad idea to keep a backup of your db. It's not crazy to want to write down your db pwd somewhere safe... It's good enough for bitcoin millionaires who take custody of their bitcoin, keeping the seed phrase(s) on physical punch cards... which is considered best practice... just saying.
 - Run `About-PSHwdMngr` for a list of functions. Most functions have an alias, (`List-Entries` = `lse`, `New-Entry` = `newe`). Most functions accept string and wildcard arguments thusly: `lse sharep*` (sharepoint) will return either a single complete record just like `Get-Entry` (`gete sharep*`) if there is a single match. Or it will return multiple matches if any. Any operation other than read will reject a query returning multiple entries.
-- Use a NAS or cloud storage account to sync db updates to multiple machines in near-real time. Autosave will save every change to the db as soon as the change is confirmed. There is one edge case that could be improved. Where two users have the DB open, and both make a change, only the most recent change will survive. This could be fixed by updating the write functions to hold new changes in a record outside the db, each change would not only autosave but would quickly reopen the db, immediately append the temp record into the db, then quickly autosave. In this way the db would drastically reducing the chance of simultaneous edits by multiple users. However, where autoclose is used (default 5 mins), especially where users reopen the db explicitly before making edits, the current implementation is adequate.
+- Use a NAS or cloud storage account to sync db updates to multiple machines in near-real time. Autosave will save every change to the db as soon as the change is confirmed, but is not configured to reload the db copy in memory. This would drastically reduce the chance of simultaneous edits by multiple users. However, where autoclose is used (default 5 mins), especially where users reopen the db explicitly before making edits, the current implementation is adequate.
 - It's handy to dot-walk $db properties and pipe to `clip` if you need to clipboard descriptions, urls, etc... just remember to clear the clipboard for anything sensitive. `closedb` and `done` will do this for you if called.
 
 
@@ -99,7 +99,7 @@ A: This becomes a mess when prioritizing auto-save and auto-close which prevents
 Q: Can I use HIBP?
 
 A: Have I Been Pwned (HIBP) requires downloading and running an executable in order to pull down a complete pwned list (best practice) and there are hundreds of millions of lines to search. Using the API instead costs a little, and I am cheap. It would be totally possible to add a property to the `$db` object, including every record created by the `newe` function, then create a function the checks each pwd in $db using the API or offline list... Sounds like a good weekend project for you...
- 
+
 Q: Can I join two DBs? How about split them out?
 
 A: Yes, but you will need to manipulate the underlying $DB array of objects and do that manually. None of the import/load/save functions in PSHwdMngr are built for that specifically. However, creative use of the $DB object and the import/load/save functions may make both possible. Be sure to backup your DB first!
